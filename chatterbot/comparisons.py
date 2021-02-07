@@ -66,6 +66,9 @@ class SpacySimilarity(Comparator):
         super().__init__(language)
         try:
             import spacy
+            import en_core_web_sm
+            #self.nlp = en_core_web_sm.load()
+
         except ImportError:
             message = (
                 'Unable to import "spacy".\n'
@@ -73,8 +76,8 @@ class SpacySimilarity(Comparator):
                 'pip3 install "spacy>=2.1,<2.2"'
             )
             raise OptionalDependencyImportError(message)
-
-        self.nlp = spacy.load(self.language.ISO_639_1)
+            
+        self.nlp = spacy.load('en_core_web_sm')
 
     def compare(self, statement_a, statement_b):
         """
@@ -127,7 +130,7 @@ class JaccardSimilarity(Comparator):
             )
             raise OptionalDependencyImportError(message)
 
-        self.nlp = spacy.load(self.language.ISO_639_1)
+        self.nlp = spacy.load('en_core_web_sm')
 
     def compare(self, statement_a, statement_b):
         """
